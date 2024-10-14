@@ -1,0 +1,19 @@
+
+version: '3.7'
+
+services:
+  backend:
+    build:
+      context: ./bitcoin_data_ingestion
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./bitcoin_data_ingestion:/usr/src/app
+    command: sh -c "./bitcoin_data_ingestion & node index.js"
+  
+  frontend:
+    build:
+      context: ./bitcoin_explorer_ui
+    ports:
+      - "3000:3000"
+    command: npm start
